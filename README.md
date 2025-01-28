@@ -1,3 +1,73 @@
+# Entrega modúlo 1 - Desarrollo de proyectos de Inteligencia Artificial
+Grupo 1:
+- Gabriel Antonio Vallejo Loaiza
+- Gregth Raynell Hernández Buenaño
+- Luis Felipe Carabali Balanta
+- Juan Fernando Rodriguez
+
+# Implementación de la solución
+
+## Ambiente
+
+- **Versión de Python:** 3.9.21
+
+### Librerias
+
+- **Tensorflow:** 2.13.0
+- **Pyautogui:** 0.9.54
+- **Pillow:** 10.0.0
+- **Tkcap:** 0.0.4
+- **Pydicom:** 2.4.3
+- **Img2pdf:** 0.4.4
+- **Opencv-python:** 4.11.0.86
+- **Matplotlib:** 3.7.2
+- **Pandas:** 2.0.3
+- **Python-xlib:** 0.33
+
+## Patrón de diseño
+
+Se estableció la siguiente estructura para almacenar los archivos ejecutables, modelos y los resultados de la ejecución de la aplicación.
+
+```
+proyecto_neumonia/
+│
+├── data/ 
+│   ├── external/
+│       └── models/ [Contiene el modelo de la red convolucional]
+│
+├── notebooks/
+│   ├── exploracion_datos.ipynb
+│   └── entrenamiento_modelo.ipynb
+│
+├── src/
+│   ├── data/
+│   ├── interface/
+│   ├── models/
+│   ├── preprocess_img.py
+│   ├── load_model.py
+│   └── grad_cam.py
+│
+├── tests/
+│   ├── test_detector_neumonia.py
+│   ├── test_integrator.py
+│   ├── test_read_img.py
+│   ├── test_preprocess_img.py
+│   ├── test_load_model.py
+│   └── test_grad_cam.py
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+# Refactorización de código
+
+## Pruebas unitarias
+
+
+
+
+
 ## Hola! Bienvenido a la herramienta para la detección rápida de neumonía
 
 Deep Learning aplicado en el procesamiento de imágenes radiográficas de tórax en formato DICOM con el fin de clasificarlas en 3 categorías diferentes:
