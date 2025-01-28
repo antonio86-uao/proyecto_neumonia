@@ -99,7 +99,22 @@ pip  install  -r  requirements.txt
 		python3  src/interface/detector_neumonia.py
 ```
 ---
-Uso  de  la  Interfaz  Gráfica:
+### Troubleshooting
+Problemas comunes y soluciones:
+
+- Error "No module named 'src'": 
+  - Usar PYTHONPATH como se indica en la sección de ejecución
+  - Verificar que está en el directorio raíz del proyecto
+
+- Error con CUDA: 
+  - La aplicación funcionará en CPU, no afecta la funcionalidad
+  - Para usar GPU, instalar CUDA y cuDNN compatibles con TensorFlow 2.13.0
+
+- Error al cargar modelo: 
+  - Verificar que el archivo .h5 está en data/external/models/
+  - Comprobar que el nombre del modelo coincide exactamente
+---
+### Uso  de  la  Interfaz  Gráfica:
 
   
 
@@ -119,7 +134,7 @@ Uso  de  la  Interfaz  Gráfica:
 
 ---
 
-Estructura  del  Proyecto
+### Estructura  del  Proyecto
 
   
 
@@ -283,7 +298,11 @@ PNG (.png)
 
 ### Autores
 
-[Mantener la sección de autores]
+## Autores
+- Isabella Torres Revelo - [GitHub](https://github.com/isa-tr)
+- Nicolas Diaz Salazar - [GitHub](https://github.com/nicolasdiazsalazar)
+
+Proyecto mejorado y mantenido por [Tu nombre/equipo]
 
 ### Licencia
 
