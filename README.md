@@ -150,12 +150,12 @@ Problemas comunes y soluciones:
 ---
 ### Ejemplos de Uso
 #### Interfaz Principal
-![Interfaz Principal](<Imagen de WhatsApp 2025-01-28 a las 20.36.29_7c6349ad.jpg>)
-![Imagen Radiográfica Cargada](<Imagen de WhatsApp 2025-01-28 a las 20.37.21_8b8250d2.jpg>)
+![Interfaz Principal](reports/figures/PantallaInicial.jpg)
+![Imagen Radiográfica Cargada](reports/figures/PantallaInicialImagenRX.jpg)
 #### Ejemplo de Predicción 
-![Predicción](<Imagen de WhatsApp 2025-01-28 a las 20.35.30_97079422.jpg>)
+![Predicción](reports/figures/PreddiccionHeatmap.jpg)
 #### Generación de Reportes 
-![CSV Resultados](image-1.png)
+![CSV Resultados](reports/figures/ReporteCSV.png)
 
 ---
 
@@ -319,8 +319,7 @@ PNG (.png)
 
 ### Resolución  recomendada:  512x512  píxeles
 
-![Viral1](image-2.png)
-![Bacteria1](person1712_bacteria_4529.jpeg)
+![Viral2](reports/figures/Viral2.png)
 
 ## Autores
 Proyecto mejorado y mantenido por:
