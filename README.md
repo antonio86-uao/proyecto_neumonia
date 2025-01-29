@@ -131,6 +131,14 @@ Problemas comunes y soluciones:
 -  Presión  el  botón  'Borrar'  si  desea  cargar  una  nueva  imagen
 
   
+---
+### Ejemplos de Uso
+#### Interfaz Principal
+ [Imagen de la interfaz principal]
+#### Ejemplo de Predicción 
+[Imagen de una predicción con el mapa de calor] 
+#### Generación de Reportes 
+[Imagen de un reporte PDF generado]
 
 ---
 

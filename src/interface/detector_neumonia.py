@@ -14,6 +14,7 @@ import tensorflow as tf
 from src.data.read_img import read_dicom_file#, read_jpg_file
 from src.models.grad_cam import grad_cam
 from src.interface.integrator import predict
+import os  # Añade esta importación al inicio del archivo
 
 class App:
     def __init__(self):
@@ -116,12 +117,16 @@ class App:
         self.text3.insert(END, "{:.2f}".format(self.proba) + "%")
 
     def save_results_csv(self):
-        with open("historial.csv", "a") as csvfile:
+        reports_folder = os.path.join(os.path.dirname(__file__), "reports")
+        if not os.path.exists(reports_folder):
+            os.makedirs(reports_folder)
+            
+        ruta_guardado = os.path.join(reports_folder, "historial.csv")
+            
+        with open(ruta_guardado, "a") as csvfile:
             w = csv.writer(csvfile, delimiter="-")
-            w.writerow(
-                [self.text1.get(), self.label, "{:.2f}".format(self.proba) + "%"]
-            )
-            showinfo(title="Guardar", message="Los datos se guardaron con éxito.")
+            w.writerow([self.text1.get(), self.label, "{:.2f}".format(self.proba) + "%"])
+            showinfo(title="Guardar",message=f"Los datos se guardaron con éxito en:\n{ruta_guardado}")
 
     def create_pdf(self):
         cap = tkcap.CAP(self.root)
