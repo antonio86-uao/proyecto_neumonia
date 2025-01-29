@@ -9,12 +9,18 @@ import csv
 import tkcap
 import numpy as np
 import tensorflow as tf
+import os  # Añade esta importación al inicio del archivo
+import sys
 
-# Importaciones de nuestros módulos
-from src.data.read_img import read_dicom_file#, read_jpg_file
+
+
+# Resto de los imports
+from src.data.read_img import read_dicom_file
 from src.models.grad_cam import grad_cam
 from src.interface.integrator import predict
-import os  # Añade esta importación al inicio del archivo
+
+
+tf.config.run_functions_eagerly(True)
 
 class App:
     def __init__(self):

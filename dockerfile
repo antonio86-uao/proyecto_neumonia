@@ -1,4 +1,3 @@
-
 # Base image
 FROM python:3.9-slim
 
@@ -25,4 +24,4 @@ RUN pip install -e .
 ENV DISPLAY=:0
 
 # Command to run the application
-CMD ["python3", "src/interface/detector_neumonia.py"]
+CMD ["python3", "-m", "src.interface.detector_neumonia"]
