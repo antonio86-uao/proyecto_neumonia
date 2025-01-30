@@ -1,6 +1,7 @@
 """
 Module for loading the trained neural network model.
 """
+
 import os
 import tensorflow as tf
 
@@ -15,7 +16,7 @@ def model_fun() -> tf.keras.Model:
         FileNotFoundError: If the model file doesn't exist
         Exception: For other loading errors
     """
-    model_path = 'data/external/models/conv_MLP_84.h5'
+    model_path = "data/external/models/conv_MLP_84.h5"
     
     # Verificar que el archivo existe
     if not os.path.exists(model_path):
@@ -27,9 +28,9 @@ def model_fun() -> tf.keras.Model:
         
         # Recompilar el modelo con configuraciones básicas
         model.compile(
-            optimizer='adam',
-            loss='categorical_crossentropy',
-            metrics=['accuracy']
+            optimizer="adam",
+            loss="categorical_crossentropy",
+            metrics=["accuracy"]
         )
         
         # Verificar que el modelo tiene la capa esperada

@@ -1,6 +1,7 @@
 """
 Module for generating Grad-CAM visualizations of model predictions.
 """
+
 import numpy as np
 import cv2
 import tensorflow as tf
@@ -40,21 +41,15 @@ def grad_cam(array: np.ndarray) -> np.ndarray:
     # Calcular los pesos de importancia para cada filtro
     pooled_grads = tf.reduce_mean(grads, axis=(0, 1, 2))
     
-    # Multiplicar cada canal por su peso de importancia y sumar usando operaciones tensoriales
+    # Multiplicar cada canal por su peso de importancia y sumar
     conv_output = conv_output[0]  # Primera imagen del batch
-    
-    # Reshape pooled_grads para hacer broadcast
     pooled_grads = tf.reshape(pooled_grads, (1, 1, -1))
-    
-    # Multiplicar usando broadcasting
     weighted_conv = tf.multiply(conv_output, pooled_grads)
     
     # Crear el mapa de calor
-    heatmap = tf.reduce_sum(weighted_conv, axis=-1)  # Sumar todos los canales
+    heatmap = tf.reduce_sum(weighted_conv, axis=-1)
     heatmap = tf.maximum(heatmap, 0)
     heatmap = heatmap / (tf.reduce_max(heatmap) + tf.keras.backend.epsilon())
-    
-    # Convertir a numpy y preparar para visualización
     heatmap = heatmap.numpy()
     
     # Redimensionar a las dimensiones objetivo
@@ -63,8 +58,6 @@ def grad_cam(array: np.ndarray) -> np.ndarray:
     
     # Normalizar a valores de 0-255 y convertir a uint8
     heatmap = np.uint8(255 * heatmap)
-    
-    # Aplicar el mapa de color
     heatmap_colored = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
     
     # Preparar la imagen original
@@ -75,6 +68,6 @@ def grad_cam(array: np.ndarray) -> np.ndarray:
     
     # Superponer el mapa de calor
     alpha = 0.7
-    superimposed_img = cv2.addWeighted(heatmap_colored, alpha, img2, 1-alpha, 0)
+    superimposed_img = cv2.addWeighted(heatmap_colored, alpha, img2, 1 - alpha, 0)
     
     return superimposed_img[:, :, ::-1]
