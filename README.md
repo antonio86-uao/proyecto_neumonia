@@ -348,15 +348,15 @@ pip  install  -r  requirements.txt
 
 ```bash
 
-pytest test/
+pytest tests/
 ```
 
 4.(Opcional) Ejecutar test de manera individual:
 
 ```bash
 
-pytest test/test_historial.py
-pytest test/test_imports.py
+pytest tests/test_historial.py
+pytest tests/test_imports.py
 ```
 
 5.(Opcional) ver informacion detallada de los errores de ejecución:
