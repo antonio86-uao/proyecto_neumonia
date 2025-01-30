@@ -49,11 +49,8 @@ Aplicación de una técnica de explicación llamada Grad-CAM para resaltar con u
 1. Clonar el repositorio:
 
 ```bash
-
 git  clone  https://github.com/antonio86-uao/proyecto_neumonia.git
-
 cd  proyecto-neumonia
-
 ```
 
 2.  Crear  y  activar  entorno  virtual:
@@ -69,17 +66,13 @@ https://docs.anaconda.com/anaconda/install/windows/
 -  Abra  Anaconda  Prompt  y  ejecute  las  siguientes  instrucciones:
 
 ```bash
-
 conda create -n tf python=3.9
-
 conda activate tf
-
   ```
 
 3. Instalar dependencias:
 
 ```bash
-
 pip  install  -r  requirements.txt
 ```
   
@@ -92,17 +85,52 @@ pip  install  -r  requirements.txt
  -  Ejecutando el módulo como un script:
 
 ```bash
-		python -m src.interface.detector_neumonia
+python -m src.interface.detector_neumonia
 ```
 
 -  Instalando  como  paquete  desarrollo:
 ```bash
-		pip  install  -e  .
-		python3  src/interface/detector_neumonia.py
+pip  install  -e  .
+python3  src/interface/detector_neumonia.py
 ```
- -  Usando  PYTHONPATH:
+ -  Usando  PYTHONPATH:	
+```bash
+PYTHONPATH=.  python3  src/interface/detector_neumonia.py
+```
 
-	PYTHONPATH=.  python3  src/interface/detector_neumonia.py
+---
+## Ejecución con Docker
+
+### Requisitos
+- Docker instalado
+- X11 para interfaz gráfica
+
+### Construcción de la imagen
+```bash
+sudo docker build -t neumonia-app .
+```
+
+###Ejecución
+
+  1. Dar acceso al display (necesario cada vez que inicie sesión):
+  
+  ```bash
+  xhost +local:docker
+  ```
+  2. Ejecutar el contenedor:
+```bash
+sudo docker run -it \
+  --net=host \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  neumonia-app
+```
+### Usando imagen de Docker Hub
+https://hub.docker.com/r/gaanvalo/neumonia-app
+
+```bash
+# Descargar la imagen
+sudo docker pull gaanvalo/neumonia-app:v2
 ---
 ### Troubleshooting
 Problemas comunes y soluciones:
@@ -370,8 +398,17 @@ pytest -v
 
 pytest es un framework de testing en Python que permite escribir pruebas simples y escalables con una sintaxis clara y concisa. Facilita la ejecución automatizada de tests, la detección de errores y la generación de reportes detallados.
 
+
+--- 
+
 ## Autores
-Proyecto mejorado y mantenido por:
+
+### Proyecto original realizado por:
+
+- Isabella Torres Revelo - https://github.com/isa-tr
+- Nicolas Diaz Salazar - https://github.com/nicolasdiazsalazar
+
+### Proyecto mejorado y mantenido por:
 - Gabriel Antonio Vallejo Loaiza - [GitHub](https://github.com/antonio86-uao/)
 - Gregth Raynell Hernández Buenaño - [GitHub](https://github.com/gregth20)
 - Juan Fernando Rodriguez  - [GitHub](https://github.com/JURFLEX)
