@@ -1,1 +1,19 @@
 data/external/models/conv_MLP_84.h5
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Ignorar archivos generados
+reports/
+*.pdf
+*.jpg
+
+# Otros archivos que es buena práctica ignorar
+.env
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store

@@ -9,11 +9,18 @@ import csv
 import tkcap
 import numpy as np
 import tensorflow as tf
+import os  # Añade esta importación al inicio del archivo
+import sys
 
-# Importaciones de nuestros módulos
-from src.data.read_img import read_dicom_file#, read_jpg_file
+
+
+# Resto de los imports
+from src.data.read_img import read_dicom_file
 from src.models.grad_cam import grad_cam
 from src.interface.integrator import predict
+
+
+tf.config.run_functions_eagerly(True)
 
 class App:
     def __init__(self):
@@ -89,6 +96,11 @@ class App:
         self.root.mainloop()
 
     def load_img_file(self):
+           # Validar que haya un número de cédula
+        cedula = self.text1.get().strip()  # strip() elimina espacios en blanco
+        if not cedula:
+            showinfo(title="Error", message="Por favor ingrese el número de cédula del paciente antes de guardar.", icon="error")
+            return
         filepath = filedialog.askopenfilename(
             initialdir="/",
             title="Select image",
@@ -116,23 +128,62 @@ class App:
         self.text3.insert(END, "{:.2f}".format(self.proba) + "%")
 
     def save_results_csv(self):
-        with open("historial.csv", "a") as csvfile:
+        # Validar que se haya hecho una predicción
+        if not hasattr(self, 'label') or not hasattr(self, 'proba'):
+            showinfo(title="Error", message="Por favor realice una predicción antes de guardar.", icon="error")
+            return
+        # Obtener la ruta raíz del proyecto (dos niveles arriba desde detector_neumonia.py)
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        
+        # Crear la carpeta reports en la raíz si no existe
+        reports_folder = os.path.join(project_root, "reports")
+        if not os.path.exists(reports_folder):
+            os.makedirs(reports_folder)
+        
+        # Definir la ruta del archivo CSV
+        ruta_guardado = os.path.join(reports_folder, "historial.csv")
+        
+        # Guardar los resultados
+        with open(ruta_guardado, "a") as csvfile:
             w = csv.writer(csvfile, delimiter="-")
-            w.writerow(
-                [self.text1.get(), self.label, "{:.2f}".format(self.proba) + "%"]
-            )
-            showinfo(title="Guardar", message="Los datos se guardaron con éxito.")
+            w.writerow([self.text1.get(), self.label, "{:.2f}".format(self.proba) + "%"])
+            showinfo(title="Guardar", message=f"Los datos se guardaron con éxito en:\n{ruta_guardado}")
 
     def create_pdf(self):
+        # Validar que se haya hecho una predicción
+        if not hasattr(self, 'label') or not hasattr(self, 'proba'):
+            showinfo(title="Error", message="Por favor realice una predicción antes de guardar.", icon="error")
+            return
+        # Obtener la ruta raíz del proyecto y la carpeta reports
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        reports_folder = os.path.join(project_root, "reports")
+        
+        # Crear la carpeta reports si no existe
+        if not os.path.exists(reports_folder):
+            os.makedirs(reports_folder)
+        
+        # Capturar la imagen
         cap = tkcap.CAP(self.root)
-        ID = "Reporte" + str(self.reportID) + ".jpg"
-        img = cap.capture(ID)
-        img = Image.open(ID)
+        
+        # Crear las rutas para los archivos jpg y pdf
+        jpg_filename = f"Reporte{self.reportID}.jpg"
+        pdf_filename = f"Reporte{self.reportID}.pdf"
+        jpg_path = os.path.join(reports_folder, jpg_filename)
+        pdf_path = os.path.join(reports_folder, pdf_filename)
+        
+        # Capturar y procesar la imagen
+        img = cap.capture(jpg_path)
+        img = Image.open(jpg_path)
         img = img.convert("RGB")
-        pdf_path = r"Reporte" + str(self.reportID) + ".pdf"
+        
+        # Guardar como PDF
         img.save(pdf_path)
         self.reportID += 1
-        showinfo(title="PDF", message="El PDF fue generado con éxito.")
+        
+        # Eliminar el archivo JPG temporal
+        os.remove(jpg_path)
+        
+        showinfo(title="PDF", message=f"El PDF fue generado con éxito en:\n{pdf_path}")
 
     def delete(self):
         answer = askokcancel(
