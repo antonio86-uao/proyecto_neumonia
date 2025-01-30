@@ -85,19 +85,24 @@ pip  install  -r  requirements.txt
   
   
 
-4.  Ejecutar  la  aplicación (dos opciones):
+4.  Ejecutar  la  aplicación (tres opciones):
 
 	 
 
- -  Usando  PYTHONPATH:
+ -  Ejecutando el módulo como un script:
 
-	PYTHONPATH=.  python3  src/interface/detector_neumonia.py
+```bash
+		python -m src.interface.detector_neumonia
+```
 
 -  Instalando  como  paquete  desarrollo:
 ```bash
 		pip  install  -e  .
 		python3  src/interface/detector_neumonia.py
 ```
+ -  Usando  PYTHONPATH:
+
+	PYTHONPATH=.  python3  src/interface/detector_neumonia.py
 ---
 ### Troubleshooting
 Problemas comunes y soluciones:
@@ -113,6 +118,17 @@ Problemas comunes y soluciones:
 - Error al cargar modelo: 
   - Verificar que el archivo .h5 está en data/external/models/
   - Comprobar que el nombre del modelo coincide exactamente
+
+---
+### Implementación de la Guía de Estilo PEP8  
+
+- Actualización de paquetes obsoletos o incompatibles:
+  - Se reemplazó el atributo ANTIALIAS de la biblioteca Python Imaging Library (PIL), ya que fue eliminado en las versiones más recientes de Pillow. Ahora, la redimensión de imágenes se realiza utilizando LANCZOS.  
+  - Se sustituyó la función K.gradients en la clase grad_cam por tf.GradientTape, que es compatible con el modo de ejecución 'eager' en TensorFlow.  
+
+- Estandarización del código:
+  - Se aplicaron las normas de PEP8 para mejorar la legibilidad.  
+  - Se añadieron docstrings en las funciones y clases para facilitar la comprensión del código.  
 ---
 ### Uso  de  la  Interfaz  Gráfica:
 
@@ -134,11 +150,12 @@ Problemas comunes y soluciones:
 ---
 ### Ejemplos de Uso
 #### Interfaz Principal
- [Imagen de la interfaz principal]
+![Interfaz Principal](reports/figures/PantallaInicial.jpg)
+![Imagen Radiográfica Cargada](reports/figures/PantallaInicialImagenRX.jpg)
 #### Ejemplo de Predicción 
-[Imagen de una predicción con el mapa de calor] 
+![Predicción](reports/figures/PreddiccionHeatmap.jpg)
 #### Generación de Reportes 
-[Imagen de un reporte PDF generado]
+![CSV Resultados](reports/figures/ReporteCSV.png)
 
 ---
 
@@ -302,16 +319,17 @@ PNG (.png)
 
 ### Resolución  recomendada:  512x512  píxeles
 
-[Aquí iría una imagen de ejemplo]
-
-### Autores
+![Viral2](reports/figures/Viral2.png)
 
 ## Autores
-- Isabella Torres Revelo - [GitHub](https://github.com/isa-tr)
-- Nicolas Diaz Salazar - [GitHub](https://github.com/nicolasdiazsalazar)
+Proyecto mejorado y mantenido por:
+- Gabriel Antonio Vallejo Loaiza - [GitHub](https://github.com/antonio86-uao/)
+- Gregth Raynell Hernández Buenaño - [GitHub](https://github.com/gregth20)
+- Juan Fernando Rodriguez 
+- Luis Felipe Carabali Balanta - [GitHub](https://github.com/lfcb-luis)
 
-Proyecto mejorado y mantenido por [Tu nombre/equipo]
+
 
 ### Licencia
 
-MIT  License
+GNU General Public License v3.0
