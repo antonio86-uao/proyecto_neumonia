@@ -131,6 +131,8 @@ https://hub.docker.com/r/gaanvalo/neumonia-app
 ```bash
 # Descargar la imagen
 sudo docker pull gaanvalo/neumonia-app:v2
+```
+
 ---
 ### Troubleshooting
 Problemas comunes y soluciones:
